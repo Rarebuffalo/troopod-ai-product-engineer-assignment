@@ -7,6 +7,117 @@
         "enable_parallax": true
       }
     },
+    "purelane_ticker": {
+      "type": "purelane-ticker",
+      "blocks": {
+        "ticker_1": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "Free shipping",
+            "bold_text": "on every bundle across India"
+          }
+        },
+        "ticker_2": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "100% plant-based",
+            "bold_text": "and non-toxic"
+          }
+        },
+        "ticker_3": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "Loved by",
+            "bold_text": "30,000+ happy homes"
+          }
+        },
+        "ticker_4": {
+          "type": "ticker_item",
+          "settings": {
+            "text": "Buy 3",
+            "bold_text": "at flat ₹499"
+          }
+        }
+      },
+      "block_order": [
+        "ticker_1",
+        "ticker_2",
+        "ticker_3",
+        "ticker_4"
+      ],
+      "settings": {
+        "speed": 30
+      }
+    },
+    "purelane_header": {
+      "type": "purelane-header",
+      "blocks": {
+        "dot_1": {
+          "type": "rail_dot",
+          "settings": {
+            "anchor_hash": "#top",
+            "label": "Hero"
+          }
+        },
+        "dot_2": {
+          "type": "rail_dot",
+          "settings": {
+            "anchor_hash": "#ingredients",
+            "label": "Ingredients"
+          }
+        },
+        "dot_3": {
+          "type": "rail_dot",
+          "settings": {
+            "anchor_hash": "#how",
+            "label": "How it works"
+          }
+        },
+        "dot_4": {
+          "type": "rail_dot",
+          "settings": {
+            "anchor_hash": "#proof",
+            "label": "Proof"
+          }
+        },
+        "dot_5": {
+          "type": "rail_dot",
+          "settings": {
+            "anchor_hash": "#bundles",
+            "label": "Bundles"
+          }
+        },
+        "dot_6": {
+          "type": "rail_dot",
+          "settings": {
+            "anchor_hash": "#shop",
+            "label": "Shop"
+          }
+        },
+        "dot_7": {
+          "type": "rail_dot",
+          "settings": {
+            "anchor_hash": "#voices",
+            "label": "Reviews"
+          }
+        }
+      },
+      "block_order": [
+        "dot_1",
+        "dot_2",
+        "dot_3",
+        "dot_4",
+        "dot_5",
+        "dot_6",
+        "dot_7"
+      ],
+      "settings": {
+        "menu": "main-menu",
+        "show_search": true,
+        "show_account": true,
+        "show_cart": true
+      }
+    },
     "purelane_hero": {
       "type": "purelane-hero",
       "blocks": {
@@ -90,6 +201,8 @@
   },
   "order": [
     "purelane_background",
+    "purelane_ticker",
+    "purelane_header",
     "purelane_hero"
   ]
 }

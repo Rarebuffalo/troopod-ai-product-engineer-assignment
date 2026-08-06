@@ -1,0 +1,134 @@
+{% comment %}
+  Purelane Floating Header & Vertical Dot Navigation Rail
+  Renders a floating glassmorphic header pill and sticky side progress indicators.
+{% endcomment %}
+
+<header class="pl-hdr" id="pl-hdr">
+  <div class="pl-navpill pl-glass">
+    <a class="pl-brand" href="#top" aria-label="Purelane home">
+      <span class="pl-mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--pl-accent);">
+          <path d="M12 3 20.5 8v8L12 21 3.5 16V8L12 3Z"/>
+          <path d="M12 12 20.5 8M12 12v9M12 12 3.5 8"/>
+        </svg>
+      </span>
+      <span class="pl-txt">
+        <span class="pl-n1">Purelane</span>
+        <span class="pl-n2">Clean, simply</span>
+      </span>
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <nav class="pl-nav" aria-label="Main navigation">
+      {%- for link in linklists[section.settings.menu].links -%}
+        <a href="{{ link.url }}">{{ link.title }}</a>
+      {%- endfor -%}
+    </nav>
+
+    <!-- Navigation Utility Tools -->
+    <div class="pl-navtools">
+      {%- if section.settings.show_search -%}
+        <a href="{{ routes.search_url }}" class="pl-ico pl-hide-s" aria-label="Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        </a>
+      {%- endif -%}
+      {%- if section.settings.show_account and shop.customer_accounts_enabled -%}
+        <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="pl-ico pl-hide-s" aria-label="Account">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="8" r="3.6"/><path d="M5 20c0-3.6 3.1-5.6 7-5.6s7 2 7 5.6"/></svg>
+        </a>
+      {%- endif -%}
+      {%- if section.settings.show_cart -%}
+        <a href="{{ routes.cart_url }}" class="pl-ico" aria-label="Cart, {{ cart.item_count }} items" id="pl-cart-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h2l2.2 10.4a1.6 1.6 0 0 0 1.6 1.3h7.6a1.6 1.6 0 0 0 1.6-1.3L20.5 9H6.4"/><circle cx="10" cy="20.5" r="1.1"/><circle cx="17.5" cy="20.5" r="1.1"/></svg>
+          <span class="pl-dot">{{ cart.item_count }}</span>
+        </a>
+      {%- endif -%}
+      <button class="pl-ico pl-burger" type="button" aria-label="Open mobile menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Sticky Side Progress Rail Navigation dots -->
+<nav class="pl-rail" aria-label="Page scroll position">
+  {%- for block in section.blocks -%}
+    {%- if block.type == 'rail_dot' -%}
+      <a
+        href="{{ block.settings.anchor_hash }}"
+        class="{% if forloop.first %}on{% endif %}"
+        aria-label="Navigate to {{ block.settings.label | escape }}"
+        {{ block.shopify_attributes }}
+      ></a>
+    {%- endif -%}
+  {%- endfor -%}
+</nav>
+
+{% schema %}
+{
+  "name": "Purelane Header",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation Menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "label": "Show Search Tool",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account",
+      "label": "Show Account Log-in",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart",
+      "label": "Show Shopping Cart",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "rail_dot",
+      "name": "Navigation Dot",
+      "settings": [
+        {
+          "type": "text",
+          "id": "anchor_hash",
+          "label": "Section Anchor Target",
+          "info": "E.g., '#top', '#ingredients', '#how', '#proof', '#bundles', '#shop', '#voices'",
+          "default": "#top"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Section Screen Reader Label",
+          "default": "Hero"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Header",
+      "blocks": [
+        { "type": "rail_dot", "settings": { "anchor_hash": "#top", "label": "Hero" } },
+        { "type": "rail_dot", "settings": { "anchor_hash": "#ingredients", "label": "Ingredients" } },
+        { "type": "rail_dot", "settings": { "anchor_hash": "#how", "label": "How it works" } },
+        { "type": "rail_dot", "settings": { "anchor_hash": "#proof", "label": "Proof" } },
+        { "type": "rail_dot", "settings": { "anchor_hash": "#bundles", "label": "Bundles" } },
+        { "type": "rail_dot", "settings": { "anchor_hash": "#shop", "label": "Shop" } },
+        { "type": "rail_dot", "settings": { "anchor_hash": "#voices", "label": "Reviews" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

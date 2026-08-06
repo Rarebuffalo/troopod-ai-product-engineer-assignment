@@ -172,33 +172,63 @@ class PurelaneHero {
   }
 
   initParallax() {
-    if (this.reduceMotion || !this.prod || !window.matchMedia('(min-width: 1024px)').matches) return;
+    if (this.reduceMotion || !this.prod) return;
 
     let mx = 0, my = 0;
     let tick = false;
+    const hdr = document.getElementById('pl-hdr');
 
-    this.onMouseMove = (e) => {
-      mx = (e.clientX / window.innerWidth - 0.5) * 2;
-      my = (e.clientY / window.innerHeight - 0.5) * 2;
+    const updatePosition = () => {
+      const y = window.scrollY || window.pageYOffset;
+
+      // Toggle sticky header position offset
+      if (hdr) {
+        hdr.classList.toggle('up', y > 90);
+      }
+
+      // Parallax on product stage bottle compositions
+      if (window.matchMedia('(min-width: 1024px)').matches) {
+        const scrollFactor = Math.min(y / 700, 1);
+        const tx = (mx * -16).toFixed(2);
+        const ty = (-scrollFactor * 54 + my * -10).toFixed(2);
+        const scaleVal = (1 - scrollFactor * 0.06).toFixed(3);
+        this.prod.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${scaleVal})`;
+      } else {
+        // Reset layout values on smaller mobile viewport sizes
+        this.prod.style.transform = '';
+      }
+      tick = false;
+    };
+
+    this.onScroll = () => {
       if (!tick) {
-        requestAnimationFrame(() => {
-          if (!this.prod) return;
-          const tx = (mx * 26).toFixed(1);
-          const ty = (my * 18).toFixed(1);
-          this.prod.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
-          tick = false;
-        });
+        requestAnimationFrame(updatePosition);
         tick = true;
       }
     };
 
+    this.onMouseMove = (e) => {
+      mx = (e.clientX / window.innerWidth - 0.5) * 2;
+      my = (e.clientY / window.innerHeight - 0.5) * 2;
+      this.onScroll();
+    };
+
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+    window.addEventListener('resize', this.onScroll);
     window.addEventListener('mousemove', this.onMouseMove, { passive: true });
+
+    // Initial position call
+    this.onScroll();
   }
 
   destroy() {
     this.stopAutoplay();
     this.section.removeEventListener('mouseenter', this.onMouseEnter);
     this.section.removeEventListener('mouseleave', this.onMouseLeave);
+    if (this.onScroll) {
+      window.removeEventListener('scroll', this.onScroll);
+      window.removeEventListener('resize', this.onScroll);
+    }
     if (this.onMouseMove) {
       window.removeEventListener('mousemove', this.onMouseMove);
     }
@@ -234,6 +264,30 @@ document.addEventListener('DOMContentLoaded', () => {
     revs.forEach(el => ro.observe(el));
   } else {
     revs.forEach(el => el.classList.add('in'));
+  }
+
+  // Vertical progress dots rail indicator synchronization on scroll
+  const rail = document.querySelector('.pl-rail');
+  if (rail) {
+    const railLinks = Array.from(rail.querySelectorAll('a'));
+    const targets = railLinks.map(a => document.querySelector(a.getAttribute('href')));
+
+    const syncRail = () => {
+      const mid = window.scrollY + window.innerHeight * 0.42;
+      let activeIdx = 0;
+      targets.forEach((target, i) => {
+        if (target && target.offsetTop <= mid) {
+          activeIdx = i;
+        }
+      });
+      railLinks.forEach((link, i) => {
+        link.classList.toggle('on', i === activeIdx);
+      });
+    };
+
+    window.addEventListener('scroll', syncRail, { passive: true });
+    // Initial trigger
+    syncRail();
   }
 });
 

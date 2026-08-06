@@ -335,7 +335,9 @@
       {%- render 'cart-drawer' -%}
     {%- endif -%}
 
-    {% sections 'header-group' %}
+    {%- unless template == 'index' -%}
+      {% sections 'header-group' %}
+    {%- endunless -%}
 
     <main
       id="MainContent"
