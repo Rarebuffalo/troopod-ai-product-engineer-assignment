@@ -289,6 +289,67 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial trigger
     syncRail();
   }
+
+  // Dynamic AJAX add-to-cart handler for reusable Purelane cards
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.pl-card-add-btn');
+    if (!btn || btn.disabled) return;
+
+    const variantId = btn.getAttribute('data-variant-id');
+    if (!variantId) return;
+
+    btn.disabled = true;
+    const oldText = btn.textContent;
+    btn.textContent = 'Adding...';
+
+    const rootPath = (window.Shopify && window.Shopify.routes) ? window.Shopify.routes.root : '/';
+
+    fetch(rootPath + 'cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        id: variantId,
+        quantity: 1
+      })
+    })
+    .then(res => {
+      if (!res.ok) throw new Error('Failed adding product to cart');
+      return res.json();
+    })
+    .then(data => {
+      btn.textContent = 'Added!';
+      return fetch(rootPath + 'cart.js');
+    })
+    .then(res => res.json())
+    .then(cart => {
+      // Synchronize all custom cart count bubbles
+      document.querySelectorAll('.pl-dot').forEach(el => {
+        el.textContent = cart.item_count;
+      });
+
+      // Update Dawn's cart drawer state if active
+      const cartDrawer = document.querySelector('cart-drawer');
+      if (cartDrawer && typeof cartDrawer.renderContents === 'function') {
+        // Dawn native cart drawer update
+        cartDrawer.renderContents(cart);
+      } else {
+        // Fallback: direct redirect to Cart view
+        window.location.href = rootPath + 'cart';
+      }
+    })
+    .catch(err => {
+      console.warn('Fallback to standard add to cart path:', err);
+      window.location.href = rootPath + 'cart/add?id=' + variantId + '&quantity=1';
+    })
+    .finally(() => {
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = oldText;
+      }, 1200);
+    });
+  });
 });
 
 // Shopify Theme Editor Integration

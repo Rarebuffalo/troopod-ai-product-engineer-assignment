@@ -101,23 +101,21 @@
 }
 .pl-btn svg { width: 15px; height: 15px; flex: 0 0 auto; fill: none; stroke: currentColor; }
 .pl-btn-primary {
-  background: linear-gradient(135deg, var(--pl-accent-2), #5d8d1c);
-  color: #08211a;
-  box-shadow: 0 12px 30px rgba(201, 118, 29, .34), inset 0 1px 0 rgba(255, 255, 255, .34);
+  background: linear-gradient(135deg, #00706a, #004b46);
+  color: #f4fdf6;
+  box-shadow: 0 12px 26px rgba(0, 80, 74, .26), inset 0 1px 0 rgba(255, 255, 255, .22);
 }
 .pl-btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 18px 40px rgba(201, 118, 29, .44), inset 0 1px 0 rgba(255, 255, 255, .4);
+  box-shadow: 0 18px 36px rgba(0, 80, 74, .32), inset 0 1px 0 rgba(255, 255, 255, .28);
 }
 .pl-btn-ghost {
-  background: rgba(236, 230, 247, .10);
-  border: 1px solid rgba(236, 230, 247, .30);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: var(--pl-surface);
+  background: rgba(255, 255, 255, .66);
+  border: 1px solid rgba(75, 58, 143, .22);
+  color: #01423b;
 }
 .pl-btn-ghost:hover {
-  background: rgba(236, 230, 247, .18);
+  background: rgba(255, 255, 255, .9);
   transform: translateY(-2px);
 }
 .pl-btn-sm {
@@ -314,8 +312,8 @@ button:focus-visible {
   place-items: center;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(160deg, rgba(236, 230, 247, .12), rgba(75, 58, 143, .2));
-  border: 1px solid rgba(236, 230, 247, .14);
+  background: linear-gradient(160deg, rgba(255, 255, 255, .60), rgba(236, 230, 247, .42));
+  border: 1px solid rgba(75, 58, 143, .10);
 }
 .pl-card-image-link {
   display: grid;
@@ -327,7 +325,7 @@ button:focus-visible {
   height: 122px;
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 12px 18px rgba(1, 24, 22, .5));
+  filter: drop-shadow(0 8px 13px rgba(0, 74, 66, .13));
 }
 .pl-card-fallback-svg {
   height: 122px;
@@ -352,13 +350,13 @@ button:focus-visible {
   text-transform: uppercase;
   padding: 4px 9px;
   border-radius: 999px;
-  background: rgba(23, 16, 43, .6);
-  border: 1px solid rgba(240, 160, 60, .32);
-  color: var(--pl-accent);
+  background: rgba(255, 255, 255, .86);
+  border: 1px solid rgba(201, 118, 29, .34);
+  color: #4f7d10;
   z-index: 2;
 }
 .pl-card-badge-pill--sold-out {
-  border-color: rgba(236, 230, 247, .24);
+  border-color: rgba(75, 58, 143, .12);
   color: var(--pl-paper-2);
 }
 .pl-card-body {
@@ -1024,4 +1022,42 @@ button:focus-visible {
   box-shadow: 0 0 0 5px rgba(201, 118, 29, .16);
   height: 22px;
   border-radius: 999px;
+}
+
+/* ---------- SECTION WRAPPERS ---------- */
+.pl-sec {
+  position: relative;
+  padding: var(--pl-sec-y) 0;
+  z-index: 2;
+}
+.pl-panel-head {
+  text-align: center;
+  margin-bottom: 26px;
+}
+.pl-panel-head .pl-d2 {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.pl-panel-head .pl-rule {
+  margin: 0 auto;
+  justify-content: center;
+  max-width: 240px;
+}
+.pl-panel-head .pl-rule i:first-child {
+  background: linear-gradient(90deg, transparent, rgba(75, 58, 143, .34));
+}
+.pl-panel-head .pl-rule i:last-child {
+  background: linear-gradient(90deg, rgba(75, 58, 143, .34), transparent);
+}
+
+/* ---------- PRODUCT GRID SHELF ---------- */
+.pl-shelf {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 860px) {
+  .pl-shelf {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

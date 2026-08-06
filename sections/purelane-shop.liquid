@@ -1,11 +1,31 @@
-<section class="purelane-section-wrapper" id="shop" data-scene="3">
-  <div class="pl-wrap" style="padding: 60px 0;">
-    <div style="text-align: center; margin-bottom: 40px;">
-      <span class="pl-kicker">{{ section.settings.kicker }}</span>
-      <h2 class="pl-d2" style="margin-top: 10px;">{{ section.settings.title }}</h2>
+{% comment %}
+  Purelane Shop/Product Grid Section
+  Renders the best-selling collection grid matching the prototype.
+{% endcomment %}
+
+<section class="pl-sec" id="shop" data-scene="3">
+  <div class="pl-wrap">
+    <div class="pl-panel-head pl-rv">
+      {%- if section.settings.kicker != blank -%}
+        <span class="pl-kicker">{{ section.settings.kicker }}</span>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="pl-d2">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      <div class="pl-rule">
+        <i></i>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+          <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+        </svg>
+        <i></i>
+      </div>
     </div>
-    <div style="text-align: center; color: var(--pl-paper-2);">
-      <p>Product Grid Placeholder (Collection: {{ section.settings.collection.title | default: 'None selected' }})</p>
+    <div class="pl-shelf">
+      {%- assign display_collection = collections[section.settings.collection] | default: collections.all -%}
+      {%- for product in display_collection.products limit: section.settings.limit -%}
+        {%- render 'purelane-product-card', card_product: product -%}
+      {%- endfor -%}
     </div>
   </div>
 </section>
@@ -13,24 +33,34 @@
 {% schema %}
 {
   "name": "Purelane Shop Grid",
-  "class": "purelane-shop-section",
+  "tag": "section",
+  "class": "section",
   "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection to display"
+    },
     {
       "type": "text",
       "id": "kicker",
-      "label": "Kicker text",
+      "label": "Kicker Text",
       "default": "Bestsellers"
     },
     {
       "type": "text",
-      "id": "title",
-      "label": "Heading",
+      "id": "heading",
+      "label": "Heading Text",
       "default": "Loved by 30,000 homes"
     },
     {
-      "type": "collection",
-      "id": "collection",
-      "label": "Select Collection"
+      "type": "range",
+      "id": "limit",
+      "min": 4,
+      "max": 24,
+      "step": 4,
+      "label": "Product Limit",
+      "default": 8
     }
   ],
   "presets": [

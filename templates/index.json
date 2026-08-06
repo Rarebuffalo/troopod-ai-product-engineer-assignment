@@ -197,12 +197,22 @@
         "secondary_btn_lbl": "How it works",
         "secondary_btn_link": "#how"
       }
+    },
+    "purelane_shop": {
+      "type": "purelane-shop",
+      "settings": {
+        "collection": "purelane-shop",
+        "kicker": "Bestsellers",
+        "heading": "Loved by 30,000 homes",
+        "limit": 8
+      }
     }
   },
   "order": [
     "purelane_background",
     "purelane_ticker",
     "purelane_header",
-    "purelane_hero"
+    "purelane_hero",
+    "purelane_shop"
   ]
 }
