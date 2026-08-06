@@ -1178,3 +1178,47 @@ button:focus-visible {
     gap: 10px;
   }
 }
+
+/* ---------- WHY BUNDLES BEAT BUYING SINGLE ---------- */
+.wb {
+  display: grid;
+  gap: 20px 16px;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 880px) {
+  .wb {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.wb-i {
+  text-align: center;
+}
+.wb-i .ci {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at 36% 28%, rgba(240, 160, 60, .22), rgba(75, 58, 143, .26));
+  border: 1px solid rgba(236, 230, 247, .22);
+  color: var(--pl-accent);
+}
+.wb-i .ci svg {
+  width: 25px;
+  height: 25px;
+}
+.wb-i h4 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  color: var(--pl-surface);
+  margin-bottom: 7px;
+}
+.wb-i p {
+  font-size: 12.2px;
+  color: var(--pl-paper-2);
+  line-height: 1.5;
+}

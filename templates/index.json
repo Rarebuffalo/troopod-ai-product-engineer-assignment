@@ -299,6 +299,53 @@
         "description": "Floors, taps, kitchen, laundry, bathroom and hands. Fourteen plant-based formulas that replace every harsh bottle under your sink.",
         "swipe_hint": "Swipe to see the full shelf"
       }
+    },
+    "purelane_benefits": {
+      "type": "purelane-benefits",
+      "settings": {
+        "eyebrow": "The smarter way to shop",
+        "heading": "Why bundles beat buying single"
+      },
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "dollar",
+            "title": "Save up to 45%",
+            "description": "Versus buying the same products separately"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "check",
+            "title": "One flat price",
+            "description": "No calculators, no comparing carts"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "star",
+            "title": "Curated by experts",
+            "description": "Products picked to work well together"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit_card",
+          "settings": {
+            "icon": "truck",
+            "title": "Free shipping always",
+            "description": "Included on every bundle, all India"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4"
+      ]
     }
   },
   "order": [
@@ -307,6 +354,7 @@
     "purelane_header",
     "purelane_hero",
     "purelane_shop",
-    "purelane_range"
+    "purelane_range",
+    "purelane_benefits"
   ]
 }
