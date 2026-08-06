@@ -1,0 +1,137 @@
+{% comment %}
+  Purelane Full Range Section
+  Displays the horizontal scrolling shelf of all Purelane product illustrations.
+{% endcomment %}
+
+<section class="pl-sec" id="range" data-scene="3">
+  <div class="pl-wrap">
+    <div class="pl-glass pl-range pl-rv">
+      <div class="pl-range-head">
+        <div>
+          {%- if section.settings.kicker != blank -%}
+            <span class="pl-kicker">{{ section.settings.kicker }}</span>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <h2 class="pl-d2" style="margin-top:10px">{{ section.settings.heading }}</h2>
+          {%- endif -%}
+        </div>
+        {%- if section.settings.description != blank -%}
+          <p class="pl-body-s" style="max-width:34ch; margin-bottom:4px">{{ section.settings.description }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="pl-stripwrap">
+        <div class="pl-rangerow">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'range_product' -%}
+              {%- assign linked_product = all_products[block.settings.product] -%}
+              {%- assign target_url = linked_product.url | default: '#shop' -%}
+              {%- assign target_title = linked_product.title | default: block.settings.label -%}
+              
+              <a 
+                href="{{ target_url }}" 
+                class="pimg {{ block.settings.illustration_class }}" 
+                role="img" 
+                aria-label="Purelane {{ target_title | escape }}"
+                {{ block.shopify_attributes }}
+              ></a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+
+      {%- if section.settings.swipe_hint != blank -%}
+        <p class="pl-striphint">{{ section.settings.swipe_hint }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Full Range",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker Text",
+      "default": "The full range"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading Text",
+      "default": "Every room, one shelf"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Floors, taps, kitchen, laundry, bathroom and hands. Fourteen plant-based formulas that replace every harsh bottle under your sink."
+    },
+    {
+      "type": "text",
+      "id": "swipe_hint",
+      "label": "Swipe Hint Text",
+      "default": "Swipe to see the full shelf"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "range_product",
+      "name": "Product Illustration",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Link to Product"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Accessibility Label (Fallback)",
+          "default": "Product bottle"
+        },
+        {
+          "type": "select",
+          "id": "illustration_class",
+          "label": "Vector Illustration Style",
+          "options": [
+            { "value": "p-floor", "label": "Floor Cleaner (Purple)" },
+            { "value": "p-tap", "label": "Tap Cleaner (Teal Spray)" },
+            { "value": "p-kitchen", "label": "Kitchen Cleaner (Purple Spray)" },
+            { "value": "p-toilet", "label": "Toilet Cleaner (Blue)" },
+            { "value": "p-laundry", "label": "Laundry Detergent (Dark Purple)" },
+            { "value": "p-dish", "label": "Dishwash Gel (Dark Blue)" },
+            { "value": "p-metal", "label": "Copper & Brass (Bronze)" },
+            { "value": "p-wm", "label": "Washing Machine (Purple Tablets)" },
+            { "value": "p-handwash", "label": "Handwash (Lavender Pump)" },
+            { "value": "p-eraser", "label": "Magic Eraser (Orange Sponge)" }
+          ],
+          "default": "p-floor"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Full Range",
+      "blocks": [
+        { "type": "range_product", "settings": { "illustration_class": "p-floor", "label": "Natural Herbal Floor Cleaner" } },
+        { "type": "range_product", "settings": { "illustration_class": "p-tap", "label": "Tap Cleaner & Limescale Remover" } },
+        { "type": "range_product", "settings": { "illustration_class": "p-kitchen", "label": "Foaming Kitchen Cleaner" } },
+        { "type": "range_product", "settings": { "illustration_class": "p-toilet", "label": "Non-toxic Toilet Cleaner" } },
+        { "type": "range_product", "settings": { "illustration_class": "p-laundry", "label": "Natural Laundry Detergent" } },
+        { "type": "range_product", "settings": { "illustration_class": "p-dish", "label": "Organic Dishwash Liquid Gel" } },
+        { "type": "range_product", "settings": { "illustration_class": "p-metal", "label": "Copper, Bronze & Brass Cleaner" } },
+        { "type": "range_product", "settings": { "illustration_class": "p-wm", "label": "Washing Machine Cleaner & Descaler" } },
+        { "type": "range_product", "settings": { "illustration_class": "p-handwash", "label": "Gentle Hydrating Liquid Handwash" } },
+        { "type": "range_product", "settings": { "illustration_class": "p-eraser", "label": "Magic Eraser Scrubber Pack" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

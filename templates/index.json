@@ -206,6 +206,99 @@
         "heading": "Loved by 30,000 homes",
         "limit": 8
       }
+    },
+    "purelane_range": {
+      "type": "purelane-range",
+      "blocks": {
+        "prod_1": {
+          "type": "range_product",
+          "settings": {
+            "illustration_class": "p-floor",
+            "label": "Natural Herbal Floor Cleaner"
+          }
+        },
+        "prod_2": {
+          "type": "range_product",
+          "settings": {
+            "illustration_class": "p-tap",
+            "label": "Tap Cleaner & Limescale Remover"
+          }
+        },
+        "prod_3": {
+          "type": "range_product",
+          "settings": {
+            "illustration_class": "p-kitchen",
+            "label": "Foaming Kitchen Cleaner"
+          }
+        },
+        "prod_4": {
+          "type": "range_product",
+          "settings": {
+            "illustration_class": "p-toilet",
+            "label": "Non-toxic Toilet Cleaner"
+          }
+        },
+        "prod_5": {
+          "type": "range_product",
+          "settings": {
+            "illustration_class": "p-laundry",
+            "label": "Natural Laundry Detergent"
+          }
+        },
+        "prod_6": {
+          "type": "range_product",
+          "settings": {
+            "illustration_class": "p-dish",
+            "label": "Organic Dishwash Liquid Gel"
+          }
+        },
+        "prod_7": {
+          "type": "range_product",
+          "settings": {
+            "illustration_class": "p-metal",
+            "label": "Copper, Bronze & Brass Cleaner"
+          }
+        },
+        "prod_8": {
+          "type": "range_product",
+          "settings": {
+            "illustration_class": "p-wm",
+            "label": "Washing Machine Cleaner & Descaler"
+          }
+        },
+        "prod_9": {
+          "type": "range_product",
+          "settings": {
+            "illustration_class": "p-handwash",
+            "label": "Gentle Hydrating Liquid Handwash"
+          }
+        },
+        "prod_10": {
+          "type": "range_product",
+          "settings": {
+            "illustration_class": "p-eraser",
+            "label": "Magic Eraser Scrubber Pack"
+          }
+        }
+      },
+      "block_order": [
+        "prod_1",
+        "prod_2",
+        "prod_3",
+        "prod_4",
+        "prod_5",
+        "prod_6",
+        "prod_7",
+        "prod_8",
+        "prod_9",
+        "prod_10"
+      ],
+      "settings": {
+        "kicker": "The full range",
+        "heading": "Every room, one shelf",
+        "description": "Floors, taps, kitchen, laundry, bathroom and hands. Fourteen plant-based formulas that replace every harsh bottle under your sink.",
+        "swipe_hint": "Swipe to see the full shelf"
+      }
     }
   },
   "order": [
@@ -213,6 +306,7 @@
     "purelane_ticker",
     "purelane_header",
     "purelane_hero",
-    "purelane_shop"
+    "purelane_shop",
+    "purelane_range"
   ]
 }
