@@ -29,7 +29,11 @@
 
     <!-- Text content columns -->
     <div class="pl-hero-copy">
-      <h1 class="pl-d1 pl-rv in">{{ section.settings.title }}</h1>
+      <h1 class="pl-d1 pl-rv in">
+        {{ section.settings.heading_line_1 }}<br>
+        {{ section.settings.heading_line_2 }}<br>
+        <span class="pl-lime">{{ section.settings.heading_accent }}</span>
+      </h1>
       <div class="pl-rule pl-rv pl-rv-d1">
         <i></i>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/><path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/></svg>
@@ -204,10 +208,22 @@
   "class": "section",
   "settings": [
     {
-      "type": "inline_richtext",
-      "id": "title",
-      "label": "Heading",
-      "default": "Clean<br>That<br><span class=\"lime\">Lasts</span>"
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading Line 1",
+      "default": "Clean"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading Line 2",
+      "default": "That"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading Accent Word",
+      "default": "Lasts"
     },
     {
       "type": "textarea",
