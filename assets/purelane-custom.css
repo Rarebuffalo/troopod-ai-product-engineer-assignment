@@ -1222,3 +1222,12 @@ button:focus-visible {
   color: var(--pl-paper-2);
   line-height: 1.5;
 }
+
+.pl-sec-pad {
+  padding: clamp(26px, 3.4vw, 40px);
+}
+@media (max-width: 760px) {
+  .pl-sec-pad {
+    padding: 22px 18px;
+  }
+}
