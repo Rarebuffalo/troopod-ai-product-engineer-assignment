@@ -1,0 +1,18 @@
+{% comment %}
+  Renders a Purelane custom product card.
+  Accepts:
+  - card_product: {Object} Product object (required)
+  - show_badge: {Boolean} Whether to show the custom/default badge (optional)
+{% endcomment %}
+
+<div class="pl-glass pl-card">
+  <div style="padding: 20px; text-align: center;">
+    {%- if card_product -%}
+      <h3>{{ card_product.title }}</h3>
+      <p>{{ card_product.price | money }}</p>
+    {%- else -%}
+      <h3>Example Product</h3>
+      <p>{{ 20000 | money }}</p>
+    {%- endif -%}
+  </div>
+</div>

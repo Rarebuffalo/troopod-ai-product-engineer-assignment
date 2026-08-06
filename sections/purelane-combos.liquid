@@ -1,0 +1,37 @@
+<section class="purelane-section-wrapper" id="combos" data-scene="3">
+  <div class="pl-wrap" style="padding: 60px 0;">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <span class="pl-kicker">{{ section.settings.kicker }}</span>
+      <h2 class="pl-d2" style="margin-top: 10px;">{{ section.settings.title }}</h2>
+    </div>
+    <div style="text-align: center; color: var(--pl-paper-2);">
+      <p>Combos Carousel Rail Placeholder</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Combos Rail",
+  "class": "purelane-combos-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker text",
+      "default": "Pre-built to save you money"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Best selling combos"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Combos Rail"
+    }
+  ]
+}
+{% endschema %}

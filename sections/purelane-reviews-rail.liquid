@@ -1,0 +1,30 @@
+<section class="purelane-section-wrapper" id="reviews" data-scene="1">
+  <div class="pl-wrap" style="padding: 40px 0;">
+    <div style="text-align: center; margin-bottom: 20px;">
+      <span class="pl-kicker">{{ section.settings.kicker }}</span>
+    </div>
+    <div style="text-align: center; color: var(--pl-paper-2);">
+      <p>Infinite Reviews Marquee Placeholder</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purelane Reviews Rail",
+  "class": "purelane-reviews-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker text",
+      "default": "That's what they said"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purelane Reviews Rail"
+    }
+  ]
+}
+{% endschema %}
