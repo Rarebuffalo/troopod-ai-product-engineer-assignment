@@ -2034,5 +2034,79 @@ button:focus-visible {
   border-radius: 999px;
 }
 
+/* ---------- SIGNUP ---------- */
+.pl-signup {
+  text-align: center;
+  padding: 44px 20px;
+}
+@media (min-width: 760px) {
+  .pl-signup {
+    padding: 60px 40px;
+  }
+}
+.pl-signup .pl-d2 {
+  margin-bottom: 8px;
+}
+.pl-signup .pl-lede {
+  margin-bottom: 24px;
+}
+.pl-signup-form {
+  display: block;
+  max-width: 440px;
+  margin: 0 auto;
+}
+.pl-signup-fields-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+@media (min-width: 480px) {
+  .pl-signup-fields-wrap {
+    flex-direction: row;
+    background: rgba(236, 230, 247, .06);
+    border: 1px solid rgba(236, 230, 247, .12);
+    border-radius: 99px;
+    padding: 4px;
+    gap: 0;
+    align-items: center;
+  }
+}
+.pl-signup-input {
+  background: rgba(236, 230, 247, .06);
+  border: 1px solid rgba(236, 230, 247, .12);
+  border-radius: 99px;
+  padding: 14px 22px;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--pl-surface);
+  outline: none;
+  transition: .3s var(--pl-ease);
+  width: 100%;
+}
+@media (min-width: 480px) {
+  .pl-signup-input {
+    background: transparent;
+    border: none;
+    padding: 12px 24px;
+  }
+}
+.pl-signup-input::placeholder {
+  color: rgba(236, 230, 247, .36);
+}
+.pl-signup-input:focus {
+  background: rgba(236, 230, 247, .12);
+  border-color: rgba(236, 230, 247, .3);
+}
+@media (min-width: 480px) {
+  .pl-signup-input:focus {
+    background: transparent;
+  }
+}
+.pl-signup button {
+  flex-shrink: 0;
+}
+
+
 
 

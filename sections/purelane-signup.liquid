@@ -1,0 +1,102 @@
+{% comment %}
+  Purelane Newsletter Signup Section
+  Displays the subscription card that posts directly to Shopify customer directory.
+{% endcomment %}
+
+<section class="pl-sec" id="signup" data-scene="4">
+  <div class="pl-wrap">
+    <div class="pl-glass pl-signup pl-rv">
+      <span class="kicker">{{ section.settings.kicker }}</span>
+      <h2 class="pl-d2" style="margin-top:12px">{{ section.settings.heading }}</h2>
+      <p class="pl-lede" style="margin:0 auto">{{ section.settings.description }}</p>
+      
+      {%- form 'customer', class: 'pl-signup-form' -%}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        
+        {%- if form.posted_successfully? -%}
+          <div class="pl-signup-success" style="margin-top: 15px; color: var(--pl-accent); font-weight: bold;">
+            {{ section.settings.success_message }}
+          </div>
+        {%- else -%}
+          {%- if form.errors -%}
+            <div class="pl-signup-error" style="margin-top: 10px; color: #ff5e5e;">
+              {{ form.errors.translated_fields.email | capitalize }}
+              {{ form.errors.messages.email }}
+            </div>
+          {%- endif -%}
+          
+          <div class="pl-signup-fields-wrap">
+            <input
+              type="email"
+              name="contact[email]"
+              id="NewsletterEmail-{{ section.id }}"
+              class="pl-signup-input"
+              value="{{ form.email }}"
+              placeholder="{{ section.settings.placeholder | escape }}"
+              aria-label="Email address"
+              required
+              aria-required="true"
+              autocorrect="off"
+              autocapitalize="off"
+              autocomplete="email"
+            >
+            <button class="btn btn-primary" type="submit">
+              {{ section.settings.button_text | escape }}
+            </button>
+          </div>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter Signup",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "kicker",
+      "label": "Kicker Text",
+      "default": "Join the Purelane Club"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get ₹100 off your first bundle"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "description",
+      "label": "Description Text",
+      "default": "Plus first access to new launches and restocks."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email Placeholder Text",
+      "default": "your@email.com"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Label",
+      "default": "Get my ₹100 off"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "Thank you for signing up!"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter Signup"
+    }
+  ]
+}
+{% endschema %}

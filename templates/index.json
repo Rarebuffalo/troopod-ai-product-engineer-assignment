@@ -849,6 +849,9 @@
         "rot_5",
         "rot_6"
       ]
+    },
+    "purelane_signup": {
+      "type": "purelane-signup"
     }
   },
   "order": [
@@ -866,6 +869,7 @@
     "purelane_reviews",
     "purelane_ingredients",
     "purelane_pillars",
-    "purelane_proof"
+    "purelane_proof",
+    "purelane_signup"
   ]
 }
