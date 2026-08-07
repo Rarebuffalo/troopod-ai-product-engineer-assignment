@@ -1,0 +1,196 @@
+{% comment %}
+  Purelane Reviews Section
+  Displays the automatic infinite scroll review cards marquee.
+{% endcomment %}
+
+<section class="pl-sec pl-revband" id="reviews" data-scene="1">
+  <div class="pl-wrap">
+    <div class="pl-revhead pl-rv">
+      <span class="kicker">{{ section.settings.kicker }}</span>
+      <span class="pl-revhead-agg">
+        <span class="pl-revhead-st">
+          {%- for i in (1..5) -%}
+            &#9733;
+          {%- endfor -%}
+        </span>
+        <b>{{ section.settings.average_rating }}</b> {{ section.settings.rating_count_text }}
+      </span>
+      <span class="pl-revhead-agg">{{ section.settings.homes_text }}</span>
+    </div>
+  </div>
+
+  <div class="pl-revrail pl-rv" aria-label="Customer reviews">
+    <div class="pl-revtrack">
+      {% comment %} Double the list to support seamless infinite animation marquee {% endcomment %}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'review' -%}
+          <article class="pl-glass-2 pl-rcard" {{ block.shopify_attributes }}>
+            <div class="pl-rcard-st">
+              {%- assign stars = block.settings.stars | plus: 0 -%}
+              {%- for i in (1..5) -%}
+                {%- if i <= stars -%}
+                  &#9733;
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            <h5>{{ block.settings.title }}</h5>
+            <p>{{ block.settings.text }}</p>
+            <div class="pl-rcard-who">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>
+              <b>{{ block.settings.author }}</b>
+              <span>&middot; {{ block.settings.product }}</span>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'review' -%}
+          <article class="pl-glass-2 pl-rcard" aria-hidden="true">
+            <div class="pl-rcard-st">
+              {%- assign stars = block.settings.stars | plus: 0 -%}
+              {%- for i in (1..5) -%}
+                {%- if i <= stars -%}
+                  &#9733;
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+            <h5>{{ block.settings.title }}</h5>
+            <p>{{ block.settings.text }}</p>
+            <div class="pl-rcard-who">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>
+              <b>{{ block.settings.author }}</b>
+              <span>&middot; {{ block.settings.product }}</span>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reviews Rail",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "kicker",
+      "label": "Kicker Text",
+      "default": "That's what they said"
+    },
+    {
+      "type": "text",
+      "id": "average_rating",
+      "label": "Average Rating Score",
+      "default": "4.8"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "rating_count_text",
+      "label": "Ratings Subtitle Text",
+      "default": "from 8,000+ reviews"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "homes_text",
+      "label": "Homes Subtitle Text",
+      "default": "Loved by <b>12 lakh+</b> homes"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review Card",
+      "settings": [
+        {
+          "type": "range",
+          "id": "stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Review Title",
+          "default": "Works like a charm"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Review Text",
+          "default": "Finally an eco option that cleans as well as the chemical detergent I used for years."
+        },
+        {
+          "type": "inline_richtext",
+          "id": "author",
+          "label": "Author Name",
+          "default": "Anita"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "product",
+          "label": "Product Reviewed",
+          "default": "Laundry detergent"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews Rail",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "title": "Works like a charm",
+            "text": "Finally an eco option that cleans as well as the chemical detergent I used for years, and it smells better.",
+            "author": "Anita",
+            "product": "Laundry detergent"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Best dishwash ever",
+            "text": "Our old dishwash left my help with dry, cracked skin. That stopped completely after we switched.",
+            "author": "Priya",
+            "product": "Dishwash gel"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Great product, great packaging",
+            "text": "Very soft on hands with a lovely fragrance, and it feels good to be using far less plastic.",
+            "author": "Sunita",
+            "product": "Liquid handwash"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Dog friendly",
+            "text": "We switched because chemical floor cleaners were setting off my dog's allergies. No reactions since.",
+            "author": "Rohit S.",
+            "product": "Floor cleaner"
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "title": "Sparkling taps again",
+            "text": "Hard water had ruined our bathroom fittings. Two sprays and the scale wipes straight off, no scrubbing.",
+            "author": "Verified buyer",
+            "product": "Tap cleaner"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
