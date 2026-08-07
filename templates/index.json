@@ -512,6 +512,74 @@
         "bundle_4",
         "bundle_5"
       ]
+    },
+    "purelane_bundle_tiers": {
+      "type": "purelane-bundle-tiers",
+      "settings": {
+        "eyebrow": "Build your bundle",
+        "heading": "One box. Every room.",
+        "description": "Mix and match across kitchen, laundry, home and skin. One flat price, no code needed, free shipping either way."
+      },
+      "blocks": {
+        "tier_1": {
+          "type": "tier",
+          "settings": {
+            "tag": "Starter",
+            "is_best": false,
+            "qty": "2",
+            "qty_unit": "Products",
+            "price": "₹349",
+            "compare_price": "₹598",
+            "price_subtitle": "Flat ₹174 per product",
+            "bullet_1": "Pick any two products",
+            "bullet_2": "Free shipping across India",
+            "illustration_1": "p-combo2"
+          }
+        },
+        "tier_2": {
+          "type": "tier",
+          "settings": {
+            "tag": "Most popular",
+            "is_best": true,
+            "qty": "3",
+            "qty_unit": "Products",
+            "price": "₹499",
+            "compare_price": "₹897",
+            "price_subtitle": "Flat ₹166 per product",
+            "bullet_1": "Pick any three products",
+            "bullet_2": "Covers kitchen and laundry",
+            "bullet_3": "Free shipping across India",
+            "illustration_1": "p-kitchen",
+            "illustration_2": "p-tap",
+            "illustration_3": "p-dish"
+          }
+        },
+        "tier_3": {
+          "type": "tier",
+          "settings": {
+            "tag": "Best value",
+            "is_best": false,
+            "qty": "5",
+            "qty_unit": "Products",
+            "price": "₹799",
+            "compare_price": "₹1,495",
+            "price_subtitle": "Flat ₹159 per product",
+            "bullet_1": "Pick any five products",
+            "bullet_2": "Covers your entire home",
+            "bullet_3": "Free shipping across India",
+            "illustration_1": "p-kitchen",
+            "illustration_2": "p-tap",
+            "illustration_3": "p-laundry",
+            "illustration_4": "p-floor",
+            "illustration_5": "p-dish"
+          }
+        }
+      },
+      "block_order": [
+        "tier_1",
+        "tier_2",
+        "tier_3"
+      ]
     }
   },
   "order": [
@@ -523,6 +591,7 @@
     "purelane_range",
     "purelane_benefits",
     "purelane_bundle_categories",
-    "purelane_bundle_showcase"
+    "purelane_bundle_showcase",
+    "purelane_bundle_tiers"
   ]
 }
