@@ -1,0 +1,577 @@
+{% comment %}
+  Purelane Bundle Showcase Section (Best Selling Combos)
+  Displays the horizontal scrolling list of pre-configured bundle cards.
+{% endcomment %}
+
+<section class="pl-sec" id="combos" data-scene="3">
+  <div class="pl-wrap">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.description != blank -%}
+      <div class="panel-head pl-rv" style="margin-bottom: 24px;">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="pl-kicker">{{ section.settings.eyebrow | escape }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="pl-d2" style="margin-top:12px">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        <div class="pl-rule" style="display: flex; align-items: center; justify-content: center; gap: 10px; margin: 12px 0 0; opacity: 0.35;">
+          <span style="flex: 0 0 30px; height: 1px; background: currentColor;"></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="width: 14px; height: 14px;"><path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/><path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/></svg>
+          <span style="flex: 0 0 30px; height: 1px; background: currentColor;"></span>
+        </div>
+        {%- if section.settings.description != blank -%}
+          <p class="pl-lede" style="margin: 14px auto 0; max-width: 50ch;">{{ section.settings.description | escape }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="pl-comborail pl-rv">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'bundle' -%}
+          <article class="pl-glass pl-combo {% if block.settings.is_hero %}hero-combo{% endif %}" {{ block.shopify_attributes }}>
+            <div class="pl-combo-tray">
+              {%- if block.settings.badge_save != blank -%}
+                <span class="pl-combo-save">{{ block.settings.badge_save | escape }}</span>
+              {%- endif -%}
+              {%- if block.settings.badge_flag != blank -%}
+                <span class="pl-combo-flag">{{ block.settings.badge_flag | escape }}</span>
+              {%- endif -%}
+
+              <div class="pl-combo-stack">
+                {%- comment -%}Render product 1{%- endcomment -%}
+                {%- if block.settings.product_1 != blank or block.settings.product_1_tag != blank -%}
+                  <span class="pl-combo-it">
+                    {%- if block.settings.product_1_illustration == 'tile-fabric' -%}
+                      <span class="tile">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+                          <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+                        </svg>
+                      </span>
+                    {%- else -%}
+                      <span class="pimg {{ block.settings.product_1_illustration }}" role="img" aria-label="{{ block.settings.product_1_tag | escape }}"></span>
+                    {%- endif -%}
+                    {%- if block.settings.product_1_tag != blank -%}
+                      <span>{{ block.settings.product_1_tag | escape }}</span>
+                    {%- endif -%}
+                  </span>
+                {%- endif -%}
+
+                {%- comment -%}Render product 2{%- endcomment -%}
+                {%- if block.settings.product_2 != blank or block.settings.product_2_tag != blank -%}
+                  <span class="pl-combo-plus" aria-hidden="true">+</span>
+                  <span class="pl-combo-it">
+                    {%- if block.settings.product_2_illustration == 'tile-fabric' -%}
+                      <span class="tile">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+                          <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+                        </svg>
+                      </span>
+                    {%- else -%}
+                      <span class="pimg {{ block.settings.product_2_illustration }}" role="img" aria-label="{{ block.settings.product_2_tag | escape }}"></span>
+                    {%- endif -%}
+                    {%- if block.settings.product_2_tag != blank -%}
+                      <span>{{ block.settings.product_2_tag | escape }}</span>
+                    {%- endif -%}
+                  </span>
+                {%- endif -%}
+
+                {%- comment -%}Render product 3{%- endcomment -%}
+                {%- if block.settings.product_3 != blank or block.settings.product_3_tag != blank -%}
+                  <span class="pl-combo-plus" aria-hidden="true">+</span>
+                  <span class="pl-combo-it">
+                    {%- if block.settings.product_3_illustration == 'tile-fabric' -%}
+                      <span class="tile">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+                          <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+                        </svg>
+                      </span>
+                    {%- else -%}
+                      <span class="pimg {{ block.settings.product_3_illustration }}" role="img" aria-label="{{ block.settings.product_3_tag | escape }}"></span>
+                    {%- endif -%}
+                    {%- if block.settings.product_3_tag != blank -%}
+                      <span>{{ block.settings.product_3_tag | escape }}</span>
+                    {%- endif -%}
+                  </span>
+                {%- endif -%}
+
+                {%- comment -%}Render product 4{%- endcomment -%}
+                {%- if block.settings.product_4 != blank or block.settings.product_4_tag != blank -%}
+                  <span class="pl-combo-plus" aria-hidden="true">+</span>
+                  <span class="pl-combo-it">
+                    {%- if block.settings.product_4_illustration == 'tile-fabric' -%}
+                      <span class="tile">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+                          <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+                        </svg>
+                      </span>
+                    {%- else -%}
+                      <span class="pimg {{ block.settings.product_4_illustration }}" role="img" aria-label="{{ block.settings.product_4_tag | escape }}"></span>
+                    {%- endif -%}
+                    {%- if block.settings.product_4_tag != blank -%}
+                      <span>{{ block.settings.product_4_tag | escape }}</span>
+                    {%- endif -%}
+                  </span>
+                {%- endif -%}
+
+                {%- comment -%}Render product 5{%- endcomment -%}
+                {%- if block.settings.product_5 != blank or block.settings.product_5_tag != blank -%}
+                  <span class="pl-combo-plus" aria-hidden="true">+</span>
+                  <span class="pl-combo-it">
+                    {%- if block.settings.product_5_illustration == 'tile-fabric' -%}
+                      <span class="tile">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 21c0-6.5 3.5-11 8-12.5C20 15 16.5 20 12 21Z"/>
+                          <path d="M12 21C12 14.5 8.5 10 4 8.5 4 15 7.5 20 12 21Z"/>
+                        </svg>
+                      </span>
+                    {%- else -%}
+                      <span class="pimg {{ block.settings.product_5_illustration }}" role="img" aria-label="{{ block.settings.product_5_tag | escape }}"></span>
+                    {%- endif -%}
+                    {%- if block.settings.product_5_tag != blank -%}
+                      <span>{{ block.settings.product_5_tag | escape }}</span>
+                    {%- endif -%}
+                  </span>
+                {%- endif -%}
+              </div>
+            </div>
+
+            <div class="body">
+              <h3>{{ block.settings.title | escape }}</h3>
+              {%- if block.settings.subtitle != blank -%}
+                <div class="cnt">{{ block.settings.subtitle | escape }}</div>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <p class="inc">{{ block.settings.description | escape }}</p>
+              {%- endif -%}
+              
+              <div class="prow">
+                <strong>{{ block.settings.price | escape }}</strong>
+                {%- if block.settings.compare_price != blank -%}
+                  <s>{{ block.settings.compare_price | escape }}</s>
+                {%- endif -%}
+                {%- if block.settings.savings_highlight != blank -%}
+                  <em>{{ block.settings.savings_highlight | escape }}</em>
+                {%- endif -%}
+              </div>
+
+              {%- if block.settings.fine_print != blank -%}
+                <div class="fine">{{ block.settings.fine_print | escape }}</div>
+              {%- endif -%}
+
+              <a class="btn {% if block.settings.is_hero %}btn-primary{% else %}btn-ghost{% endif %}" href="{{ block.settings.cta_link | default: '#bundles' }}">
+                {{ block.settings.cta_text | escape }}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; margin-left: 6px;"><path d="M5 12h13m-5-6 6 6-6 6"/></svg>
+              </a>
+            </div>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.swipe_hint != blank -%}
+      <div class="pl-swipecue" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13m-5-6 6 6-6 6"/></svg>
+        {{ section.settings.swipe_hint | escape }}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.note != blank -%}
+      <p class="pl-railnote">{{ section.settings.note | escape }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bundle Showcase",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Pre-built to save you money"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Best selling combos"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Swipe through the boxes people order most. Each one is already priced below buying the same products on their own."
+    },
+    {
+      "type": "text",
+      "id": "swipe_hint",
+      "label": "Swipe Hint",
+      "default": "Swipe for more combos"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Footer Note",
+      "default": "Tapping \"Shop bundle\" opens the bundle picker with these products already added. You can still swap anything before you pay."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle",
+      "name": "Combo Bundle Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Bundle Title",
+          "default": "Kitchen essentials"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "3 products"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Includes: Foaming Kitchen Cleaner, Dishwash Gel & Tap Cleaner. Everything for a sparkling kitchen, no need to pick separately."
+        },
+        {
+          "type": "checkbox",
+          "id": "is_hero",
+          "label": "Highlight as Hero Card (Primary CTA)",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "badge_save",
+          "label": "Savings Badge (e.g. You save ₹398)",
+          "default": "You save ₹398"
+        },
+        {
+          "type": "text",
+          "id": "badge_flag",
+          "label": "Flag Tag (e.g. Most popular)",
+          "default": "Most popular"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "₹499"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare-at Price",
+          "default": "₹897"
+        },
+        {
+          "type": "text",
+          "id": "savings_highlight",
+          "label": "Savings Highlight",
+          "default": "Save ₹398"
+        },
+        {
+          "type": "text",
+          "id": "fine_print",
+          "label": "Fine Print",
+          "default": "Inclusive of all taxes · COD available"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "CTA Text",
+          "default": "Shop bundle"
+        },
+        {
+          "type": "url",
+          "id": "cta_link",
+          "label": "CTA Link"
+        },
+        {
+          "type": "header",
+          "content": "Product 1"
+        },
+        {
+          "type": "product",
+          "id": "product_1",
+          "label": "Shopify Product 1"
+        },
+        {
+          "type": "text",
+          "id": "product_1_tag",
+          "label": "Product 1 Tagline",
+          "default": "Cuts grease instantly"
+        },
+        {
+          "type": "select",
+          "id": "product_1_illustration",
+          "label": "Product 1 Illustration",
+          "options": [
+            { "value": "p-kitchen", "label": "Kitchen Cleaner" },
+            { "value": "p-toilet", "label": "Toilet Cleaner" },
+            { "value": "p-laundry", "label": "Laundry Detergent" },
+            { "value": "p-tap", "label": "Tap Cleaner" },
+            { "value": "p-floor", "label": "Floor Cleaner" },
+            { "value": "p-dish", "label": "Dishwash Gel" },
+            { "value": "p-metal", "label": "Copper Cleaner" },
+            { "value": "p-wm", "label": "Washing Machine Cleaner" },
+            { "value": "p-handwash", "label": "Handwash" },
+            { "value": "p-eraser", "label": "Magic Eraser" },
+            { "value": "tile-fabric", "label": "Dotted Tile (Fabric Conditioner fallback)" }
+          ],
+          "default": "p-kitchen"
+        },
+        {
+          "type": "header",
+          "content": "Product 2"
+        },
+        {
+          "type": "product",
+          "id": "product_2",
+          "label": "Shopify Product 2"
+        },
+        {
+          "type": "text",
+          "id": "product_2_tag",
+          "label": "Product 2 Tagline",
+          "default": "Squeaky clean dishes"
+        },
+        {
+          "type": "select",
+          "id": "product_2_illustration",
+          "label": "Product 2 Illustration",
+          "options": [
+            { "value": "p-kitchen", "label": "Kitchen Cleaner" },
+            { "value": "p-toilet", "label": "Toilet Cleaner" },
+            { "value": "p-laundry", "label": "Laundry Detergent" },
+            { "value": "p-tap", "label": "Tap Cleaner" },
+            { "value": "p-floor", "label": "Floor Cleaner" },
+            { "value": "p-dish", "label": "Dishwash Gel" },
+            { "value": "p-metal", "label": "Copper Cleaner" },
+            { "value": "p-wm", "label": "Washing Machine Cleaner" },
+            { "value": "p-handwash", "label": "Handwash" },
+            { "value": "p-eraser", "label": "Magic Eraser" },
+            { "value": "tile-fabric", "label": "Dotted Tile (Fabric Conditioner fallback)" }
+          ],
+          "default": "p-dish"
+        },
+        {
+          "type": "header",
+          "content": "Product 3"
+        },
+        {
+          "type": "product",
+          "id": "product_3",
+          "label": "Shopify Product 3"
+        },
+        {
+          "type": "text",
+          "id": "product_3_tag",
+          "label": "Product 3 Tagline",
+          "default": "Melts hard water stains"
+        },
+        {
+          "type": "select",
+          "id": "product_3_illustration",
+          "label": "Product 3 Illustration",
+          "options": [
+            { "value": "p-kitchen", "label": "Kitchen Cleaner" },
+            { "value": "p-toilet", "label": "Toilet Cleaner" },
+            { "value": "p-laundry", "label": "Laundry Detergent" },
+            { "value": "p-tap", "label": "Tap Cleaner" },
+            { "value": "p-floor", "label": "Floor Cleaner" },
+            { "value": "p-dish", "label": "Dishwash Gel" },
+            { "value": "p-metal", "label": "Copper Cleaner" },
+            { "value": "p-wm", "label": "Washing Machine Cleaner" },
+            { "value": "p-handwash", "label": "Handwash" },
+            { "value": "p-eraser", "label": "Magic Eraser" },
+            { "value": "tile-fabric", "label": "Dotted Tile (Fabric Conditioner fallback)" }
+          ],
+          "default": "p-tap"
+        },
+        {
+          "type": "header",
+          "content": "Product 4"
+        },
+        {
+          "type": "product",
+          "id": "product_4",
+          "label": "Shopify Product 4 (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "product_4_tag",
+          "label": "Product 4 Tagline"
+        },
+        {
+          "type": "select",
+          "id": "product_4_illustration",
+          "label": "Product 4 Illustration",
+          "options": [
+            { "value": "p-kitchen", "label": "Kitchen Cleaner" },
+            { "value": "p-toilet", "label": "Toilet Cleaner" },
+            { "value": "p-laundry", "label": "Laundry Detergent" },
+            { "value": "p-tap", "label": "Tap Cleaner" },
+            { "value": "p-floor", "label": "Floor Cleaner" },
+            { "value": "p-dish", "label": "Dishwash Gel" },
+            { "value": "p-metal", "label": "Copper Cleaner" },
+            { "value": "p-wm", "label": "Washing Machine Cleaner" },
+            { "value": "p-handwash", "label": "Handwash" },
+            { "value": "p-eraser", "label": "Magic Eraser" },
+            { "value": "tile-fabric", "label": "Dotted Tile (Fabric Conditioner fallback)" }
+          ],
+          "default": "p-kitchen"
+        },
+        {
+          "type": "header",
+          "content": "Product 5"
+        },
+        {
+          "type": "product",
+          "id": "product_5",
+          "label": "Shopify Product 5 (Optional)"
+        },
+        {
+          "type": "text",
+          "id": "product_5_tag",
+          "label": "Product 5 Tagline"
+        },
+        {
+          "type": "select",
+          "id": "product_5_illustration",
+          "label": "Product 5 Illustration",
+          "options": [
+            { "value": "p-kitchen", "label": "Kitchen Cleaner" },
+            { "value": "p-toilet", "label": "Toilet Cleaner" },
+            { "value": "p-laundry", "label": "Laundry Detergent" },
+            { "value": "p-tap", "label": "Tap Cleaner" },
+            { "value": "p-floor", "label": "Floor Cleaner" },
+            { "value": "p-dish", "label": "Dishwash Gel" },
+            { "value": "p-metal", "label": "Copper Cleaner" },
+            { "value": "p-wm", "label": "Washing Machine Cleaner" },
+            { "value": "p-handwash", "label": "Handwash" },
+            { "value": "p-eraser", "label": "Magic Eraser" },
+            { "value": "tile-fabric", "label": "Dotted Tile (Fabric Conditioner fallback)" }
+          ],
+          "default": "p-kitchen"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bundle Showcase",
+      "blocks": [
+        {
+          "type": "bundle",
+          "settings": {
+            "title": "Kitchen essentials",
+            "subtitle": "3 products",
+            "description": "Includes: Foaming Kitchen Cleaner, Dishwash Gel & Tap Cleaner. Everything for a sparkling kitchen, no need to pick separately.",
+            "is_hero": false,
+            "badge_save": "You save ₹398",
+            "badge_flag": "Most popular",
+            "price": "₹499",
+            "compare_price": "₹897",
+            "savings_highlight": "Save ₹398",
+            "product_1_tag": "Cuts grease instantly",
+            "product_1_illustration": "p-kitchen",
+            "product_2_tag": "Squeaky clean dishes",
+            "product_2_illustration": "p-dish",
+            "product_3_tag": "Melts hard water stains",
+            "product_3_illustration": "p-tap"
+          }
+        },
+        {
+          "type": "bundle",
+          "settings": {
+            "title": "Laundry care bundle",
+            "subtitle": "3 products",
+            "description": "Includes: Laundry Detergent, Fabric Conditioner & Machine Cleaner Powder. Softer, fresher wash, all in one box.",
+            "is_hero": false,
+            "badge_save": "You save ₹448",
+            "badge_flag": "",
+            "price": "₹499",
+            "compare_price": "₹947",
+            "savings_highlight": "Save ₹448",
+            "product_1_tag": "Removes tough stains & odour",
+            "product_1_illustration": "p-laundry",
+            "product_2_tag": "Softens & freshens every wash",
+            "product_2_illustration": "tile-fabric",
+            "product_3_tag": "Deep-cleans your machine",
+            "product_3_illustration": "p-wm"
+          }
+        },
+        {
+          "type": "bundle",
+          "settings": {
+            "title": "Complete home bundle",
+            "subtitle": "5 products",
+            "description": "Includes: Kitchen Cleaner, Laundry Detergent, Floor Cleaner, Toilet Cleaner & Handwash. Our biggest saving box.",
+            "is_hero": true,
+            "badge_save": "Biggest saving",
+            "badge_flag": "Best value",
+            "price": "₹799",
+            "compare_price": "₹1,495",
+            "savings_highlight": "Save ₹696",
+            "product_1_tag": "Cuts grease instantly",
+            "product_1_illustration": "p-kitchen",
+            "product_2_tag": "Kills 99.9% germs",
+            "product_2_illustration": "p-floor",
+            "product_3_tag": "Gentle hydration for hands",
+            "product_3_illustration": "p-handwash"
+          }
+        },
+        {
+          "type": "bundle",
+          "settings": {
+            "title": "Bathroom deep clean",
+            "subtitle": "3 products",
+            "description": "Includes: Toilet Cleaner, Tap Cleaner & Magic Eraser. A complete bathroom refresh in one box.",
+            "is_hero": false,
+            "badge_save": "You save ₹398",
+            "badge_flag": "",
+            "price": "₹499",
+            "compare_price": "₹897",
+            "savings_highlight": "Save ₹398",
+            "product_1_tag": "Kills 99.9% germs",
+            "product_1_illustration": "p-toilet",
+            "product_2_tag": "Melts hard water stains",
+            "product_2_illustration": "p-tap",
+            "product_3_tag": "Scrubs away soap scum",
+            "product_3_illustration": "p-eraser"
+          }
+        },
+        {
+          "type": "bundle",
+          "settings": {
+            "title": "Hard water solution kit",
+            "subtitle": "2 products",
+            "description": "Includes: Tap Cleaner & Toilet Cleaner. A quick, focused fix for hard water stains across the home.",
+            "is_hero": false,
+            "badge_save": "You save ₹249",
+            "badge_flag": "",
+            "price": "₹349",
+            "compare_price": "₹598",
+            "savings_highlight": "Save ₹249",
+            "product_1_tag": "Melts hard water stains",
+            "product_1_illustration": "p-tap",
+            "product_2_tag": "Fights limescale in the bowl",
+            "product_2_illustration": "p-toilet"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
