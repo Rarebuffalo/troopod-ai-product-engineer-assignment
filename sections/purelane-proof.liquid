@@ -1,0 +1,249 @@
+{% comment %}
+  Purelane Proof Section
+  Displays stats on the left and an auto-rotating product slideshow on the right.
+{% endcomment %}
+
+<section class="pl-sec" id="proof" data-scene="3">
+  <div class="pl-wrap">
+    <div class="pl-glass pl-sec-pad pl-rv">
+      <div class="pl-proof">
+        <div class="pl-proof-l">
+          <span class="kicker">{{ section.settings.kicker }}</span>
+          <h2 class="pl-d2" style="margin-top:12px">{{ section.settings.heading | newline_to_br }}</h2>
+          <p class="pl-body-s" style="max-width:40ch">{{ section.settings.description }}</p>
+          
+          <div class="pl-stats pl-proof-stats">
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'stat_item' -%}
+                <div class="pl-stat" {{ block.shopify_attributes }}>
+                  <div class="pl-ring">{{ block.settings.value }}</div>
+                  <h5>{{ block.settings.title }}</h5>
+                  <p>{{ block.settings.text }}</p>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+
+        <div class="pl-glass-2 pl-rot" aria-hidden="true">
+          <div class="pl-frame">
+            {%- assign slides_count = 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'rotator_slide' -%}
+                {%- assign slides_count = slides_count | plus: 1 -%}
+                {%- if block.settings.custom_image != blank -%}
+                  <img src="{{ block.settings.custom_image | image_url: width: 400 }}"
+                       alt="{{ block.settings.title | escape }}"
+                       class="pimg{% if slides_count == 1 %} on{% endif %} pl-rot-pimg"
+                       data-name="{{ block.settings.title | escape }}"
+                       data-note="{{ block.settings.description | escape }}"
+                       width="400"
+                       height="{{ 400 | divided_by: block.settings.custom_image.aspect_ratio | round }}"
+                       loading="lazy">
+                {%- else -%}
+                  {% comment %} Render fallback vector SVGs with aspect ratios matching CSS classes {% endcomment %}
+                  <span class="pimg p-{{ block.settings.illustration }}{% if slides_count == 1 %} on{% endif %} pl-rot-pimg"
+                        role="img"
+                        aria-label="{{ block.settings.title | escape }}"
+                        data-name="{{ block.settings.title | escape }}"
+                        data-note="{{ block.settings.description | escape }}"></span>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+          <div class="pl-cap">
+            <b class="pl-rot-cap-title">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'rotator_slide' -%}
+                  {{ block.settings.title }}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </b>
+            <span class="pl-rot-cap-sub">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'rotator_slide' -%}
+                  {{ block.settings.description }}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+            </span>
+          </div>
+          <div class="pl-dots">
+            {%- assign dots_count = 0 -%}
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'rotator_slide' -%}
+                {%- assign dots_count = dots_count | plus: 1 -%}
+                <i class="{% if dots_count == 1 %}on{% endif %} pl-rot-dot"></i>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Proof",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "kicker",
+      "label": "Kicker Text",
+      "default": "Why it works"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Tough on grime.\nGentle on everything else."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "description",
+      "label": "Description Text",
+      "default": "Every formula is built on plant-derived cleansers and essential oils. It behaves exactly like the cleaner you are used to, minus the things you never signed up for."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat_item",
+      "name": "Stat Card",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Stat Score Value",
+          "default": "98%"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Stat Subtitle Title",
+          "default": "Bio-based"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Stat Brief Text",
+          "default": "Carbon derived from plants"
+        }
+      ]
+    },
+    {
+      "type": "rotator_slide",
+      "name": "Rotator Product Slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title",
+          "default": "Kitchen cleaner"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "description",
+          "label": "Product Description Caption",
+          "default": "Foam lifts grease, no scrubbing"
+        },
+        {
+          "type": "select",
+          "id": "illustration",
+          "label": "Product Fallback Illustration",
+          "options": [
+            { "value": "kitchen", "label": "Foaming Kitchen Cleaner" },
+            { "value": "tap", "label": "Tap Cleaner & Limescale Remover" },
+            { "value": "laundry", "label": "Laundry Detergent" },
+            { "value": "toilet", "label": "Toilet Cleaner" },
+            { "value": "floor", "label": "Herbal Floor Cleaner" },
+            { "value": "dish", "label": "Organic Dishwash Gel" }
+          ],
+          "default": "kitchen"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Product Image (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Proof",
+      "blocks": [
+        {
+          "type": "stat_item",
+          "settings": {
+            "value": "98%",
+            "title": "Bio-based",
+            "text": "Carbon derived from plants"
+          }
+        },
+        {
+          "type": "stat_item",
+          "settings": {
+            "value": "100%",
+            "title": "Vegan",
+            "text": "Plant powered cleansers"
+          }
+        },
+        {
+          "type": "rotator_slide",
+          "settings": {
+            "title": "Kitchen cleaner",
+            "description": "Foam lifts grease, no scrubbing",
+            "illustration": "kitchen"
+          }
+        },
+        {
+          "type": "rotator_slide",
+          "settings": {
+            "title": "Tap & limescale",
+            "description": "Melts hard water stains",
+            "illustration": "tap"
+          }
+        },
+        {
+          "type": "rotator_slide",
+          "settings": {
+            "title": "Laundry detergent",
+            "description": "Tough on odour, soft on fabric",
+            "illustration": "laundry"
+          }
+        },
+        {
+          "type": "rotator_slide",
+          "settings": {
+            "title": "Toilet cleaner",
+            "description": "Kills 99.9% of germs",
+            "illustration": "toilet"
+          }
+        },
+        {
+          "type": "rotator_slide",
+          "settings": {
+            "title": "Floor cleaner",
+            "description": "Neem powered, pet safe",
+            "illustration": "floor"
+          }
+        },
+        {
+          "type": "rotator_slide",
+          "settings": {
+            "title": "Dishwash gel",
+            "description": "Cuts grease, kind to hands",
+            "illustration": "dish"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+{% comment %} force-sync-1 {% endcomment %}

@@ -770,6 +770,85 @@
         "pil_2",
         "pil_3"
       ]
+    },
+    "purelane_proof": {
+      "type": "purelane-proof",
+      "blocks": {
+        "stat_1": {
+          "type": "stat_item",
+          "settings": {
+            "value": "98%",
+            "title": "Bio-based",
+            "text": "Carbon derived from plants"
+          }
+        },
+        "stat_2": {
+          "type": "stat_item",
+          "settings": {
+            "value": "100%",
+            "title": "Vegan",
+            "text": "Plant powered cleansers"
+          }
+        },
+        "rot_1": {
+          "type": "rotator_slide",
+          "settings": {
+            "title": "Kitchen cleaner",
+            "description": "Foam lifts grease, no scrubbing",
+            "illustration": "kitchen"
+          }
+        },
+        "rot_2": {
+          "type": "rotator_slide",
+          "settings": {
+            "title": "Tap & limescale",
+            "description": "Melts hard water stains",
+            "illustration": "tap"
+          }
+        },
+        "rot_3": {
+          "type": "rotator_slide",
+          "settings": {
+            "title": "Laundry detergent",
+            "description": "Tough on odour, soft on fabric",
+            "illustration": "laundry"
+          }
+        },
+        "rot_4": {
+          "type": "rotator_slide",
+          "settings": {
+            "title": "Toilet cleaner",
+            "description": "Kills 99.9% of germs",
+            "illustration": "toilet"
+          }
+        },
+        "rot_5": {
+          "type": "rotator_slide",
+          "settings": {
+            "title": "Floor cleaner",
+            "description": "Neem powered, pet safe",
+            "illustration": "floor"
+          }
+        },
+        "rot_6": {
+          "type": "rotator_slide",
+          "settings": {
+            "title": "Dishwash gel",
+            "description": "Cuts grease, kind to hands",
+            "illustration": "dish"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "rot_1",
+        "rot_2",
+        "rot_3",
+        "rot_4",
+        "rot_5",
+        "rot_6"
+      ]
     }
   },
   "order": [
@@ -786,6 +865,7 @@
     "purelane_trust_bar",
     "purelane_reviews",
     "purelane_ingredients",
-    "purelane_pillars"
+    "purelane_pillars",
+    "purelane_proof"
   ]
 }

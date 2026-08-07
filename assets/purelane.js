@@ -235,6 +235,69 @@ class PurelaneHero {
   }
 }
 
+class PurelaneRotator {
+  constructor(element) {
+    this.rot = element;
+    this.imgs = Array.from(this.rot.querySelectorAll('.pl-rot-pimg'));
+    this.dots = Array.from(this.rot.querySelectorAll('.pl-rot-dot'));
+    this.capB = this.rot.querySelector('.pl-rot-cap-title');
+    this.capS = this.rot.querySelector('.pl-rot-cap-sub');
+    this.idx = 0;
+    this.timer = null;
+    this.interval = 2900;
+    this.reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (this.imgs.length <= 1) return;
+
+    if (!this.reduceMotion && 'IntersectionObserver' in window) {
+      this.io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !this.timer) {
+            this.start();
+          } else if (!entry.isIntersecting && this.timer) {
+            this.stop();
+          }
+        });
+      }, { threshold: 0.25 });
+      this.io.observe(this.rot);
+    } else {
+      this.start();
+    }
+  }
+
+  step() {
+    this.imgs[this.idx].classList.remove('on');
+    if (this.dots[this.idx]) this.dots[this.idx].classList.remove('on');
+    this.idx = (this.idx + 1) % this.imgs.length;
+    this.imgs[this.idx].classList.add('on');
+    if (this.dots[this.idx]) this.dots[this.idx].classList.add('on');
+    
+    const name = this.imgs[this.idx].getAttribute('data-name');
+    const note = this.imgs[this.idx].getAttribute('data-note');
+    if (this.capB && name) this.capB.innerHTML = name;
+    if (this.capS && note) this.capS.textContent = note;
+  }
+
+  start() {
+    this.stop();
+    this.timer = setInterval(() => this.step(), this.interval);
+  }
+
+  stop() {
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
+  }
+
+  destroy() {
+    this.stop();
+    if (this.io) {
+      this.io.disconnect();
+    }
+  }
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
   window.purelaneBackdrop = new PurelaneBackdrop();
@@ -242,6 +305,11 @@ document.addEventListener('DOMContentLoaded', () => {
   window.purelaneHeroes = [];
   document.querySelectorAll('.pl-hero').forEach(el => {
     window.purelaneHeroes.push(new PurelaneHero(el));
+  });
+
+  window.purelaneRotators = [];
+  document.querySelectorAll('.pl-rot').forEach(el => {
+    window.purelaneRotators.push(new PurelaneRotator(el));
   });
 
   // Custom reveal on scroll functionality using IntersectionObserver
@@ -365,6 +433,12 @@ document.addEventListener('shopify:section:load', (e) => {
     if (!window.purelaneHeroes) window.purelaneHeroes = [];
     window.purelaneHeroes.push(new PurelaneHero(hero));
   }
+
+  const rot = e.target.querySelector('.pl-rot');
+  if (rot) {
+    if (!window.purelaneRotators) window.purelaneRotators = [];
+    window.purelaneRotators.push(new PurelaneRotator(rot));
+  }
 });
 
 document.addEventListener('shopify:section:unload', (e) => {
@@ -378,6 +452,15 @@ document.addEventListener('shopify:section:unload', (e) => {
     if (idx > -1) {
       window.purelaneHeroes[idx].destroy();
       window.purelaneHeroes.splice(idx, 1);
+    }
+  }
+
+  const rot = e.target.querySelector('.pl-rot');
+  if (rot && window.purelaneRotators) {
+    const idx = window.purelaneRotators.findIndex(inst => inst.rot === rot);
+    if (idx > -1) {
+      window.purelaneRotators[idx].destroy();
+      window.purelaneRotators.splice(idx, 1);
     }
   }
 });
