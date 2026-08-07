@@ -346,6 +346,57 @@
         "benefit_3",
         "benefit_4"
       ]
+    },
+    "purelane_bundle_categories": {
+      "type": "purelane-bundle-categories",
+      "settings": {
+        "eyebrow": "Bundle categories",
+        "heading": "Find the right bundle for you"
+      },
+      "blocks": {
+        "cat_1": {
+          "type": "category_card",
+          "settings": {
+            "title": "Kitchen bundle",
+            "description": "Grease, dishes & more",
+            "illustration_class": "p-kitchen",
+            "cta_link": "#combos"
+          }
+        },
+        "cat_2": {
+          "type": "category_card",
+          "settings": {
+            "title": "Bathroom bundle",
+            "description": "Deep clean & disinfect",
+            "illustration_class": "p-toilet",
+            "cta_link": "#combos"
+          }
+        },
+        "cat_3": {
+          "type": "category_card",
+          "settings": {
+            "title": "Laundry bundle",
+            "description": "Softer, fresher wash",
+            "illustration_class": "p-laundry",
+            "cta_link": "#combos"
+          }
+        },
+        "cat_4": {
+          "type": "category_card",
+          "settings": {
+            "title": "Hard water bundle",
+            "description": "Melt away limescale",
+            "illustration_class": "p-tap",
+            "cta_link": "#combos"
+          }
+        }
+      },
+      "block_order": [
+        "cat_1",
+        "cat_2",
+        "cat_3",
+        "cat_4"
+      ]
     }
   },
   "order": [
@@ -355,6 +406,7 @@
     "purelane_hero",
     "purelane_shop",
     "purelane_range",
-    "purelane_benefits"
+    "purelane_benefits",
+    "purelane_bundle_categories"
   ]
 }
