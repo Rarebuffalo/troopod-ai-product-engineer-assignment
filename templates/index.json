@@ -681,6 +681,95 @@
         "rev_4",
         "rev_5"
       ]
+    },
+    "purelane_ingredients": {
+      "type": "purelane-ingredients",
+      "blocks": {
+        "ing_1": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "coconut",
+            "title": "Coconut",
+            "text": "Plant-derived cleansers that lift grease"
+          }
+        },
+        "ing_2": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "orange",
+            "title": "Orange peel",
+            "text": "Natural degreaser and fresh citrus lift"
+          }
+        },
+        "ing_3": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "soapnut",
+            "title": "Soap nut",
+            "text": "A traditional plant foaming agent"
+          }
+        },
+        "ing_4": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "neem",
+            "title": "Neem",
+            "text": "Time-tested antibacterial from the tree"
+          }
+        },
+        "ing_5": {
+          "type": "ingredient",
+          "settings": {
+            "icon": "lemongrass",
+            "title": "Lemongrass",
+            "text": "Clean fragrance with nothing synthetic"
+          }
+        }
+      },
+      "block_order": [
+        "ing_1",
+        "ing_2",
+        "ing_3",
+        "ing_4",
+        "ing_5"
+      ]
+    },
+    "purelane_pillars": {
+      "type": "purelane-pillars",
+      "blocks": {
+        "pil_1": {
+          "type": "pillar",
+          "settings": {
+            "icon": "scrubbing",
+            "title": "Less scrubbing",
+            "text": "A foaming formulation. The foam clings to grease and lifts it, so you wipe instead of scrub.",
+            "link": "/#shop"
+          }
+        },
+        "pil_2": {
+          "type": "pillar",
+          "settings": {
+            "icon": "clean",
+            "title": "Clean ingredients",
+            "text": "No sulphates, no chlorine, no synthetic fragrance. Nothing on the label you would not want near your food.",
+            "link": "/#ingredients"
+          }
+        },
+        "pil_3": {
+          "type": "pillar",
+          "settings": {
+            "icon": "safe",
+            "title": "Safe around everyone",
+            "text": "Gentle on hands, safe around kids and pets, and it leaves no toxic residue on the surfaces you touch every day.",
+            "link": "/#proof"
+          }
+        }
+      },
+      "block_order": [
+        "pil_1",
+        "pil_2",
+        "pil_3"
+      ]
     }
   },
   "order": [
@@ -695,6 +784,8 @@
     "purelane_bundle_showcase",
     "purelane_bundle_tiers",
     "purelane_trust_bar",
-    "purelane_reviews"
+    "purelane_reviews",
+    "purelane_ingredients",
+    "purelane_pillars"
   ]
 }
