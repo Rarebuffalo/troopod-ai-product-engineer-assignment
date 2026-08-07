@@ -1653,3 +1653,36 @@ button:focus-visible {
     font-size: 44px;
   }
 }
+
+/* ---------- TRUST BAR ---------- */
+.pl-trust {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 22px 18px;
+}
+@media (min-width: 760px) {
+  .pl-trust {
+    grid-template-columns: repeat(4, 1fr);
+    padding: 30px 20px;
+  }
+}
+.pl-trust-i {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.pl-trust-i svg {
+  width: 32px;
+  height: 32px;
+  color: var(--pl-accent);
+  flex: 0 0 auto;
+}
+.pl-trust-i span {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.32;
+  color: var(--pl-paper-2);
+  text-transform: uppercase;
+  letter-spacing: .02em;
+}

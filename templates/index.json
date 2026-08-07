@@ -580,6 +580,45 @@
         "tier_2",
         "tier_3"
       ]
+    },
+    "purelane_trust_bar": {
+      "type": "purelane-trust-bar",
+      "blocks": {
+        "item_1": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "leaf",
+            "text": "Plant derived<br>formulas"
+          }
+        },
+        "item_2": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "box",
+            "text": "Recyclable<br>packaging"
+          }
+        },
+        "item_3": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "heart",
+            "text": "Safe for<br>kids & pets"
+          }
+        },
+        "item_4": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "globe",
+            "text": "Made in<br>India"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ]
     }
   },
   "order": [
@@ -592,6 +631,7 @@
     "purelane_benefits",
     "purelane_bundle_categories",
     "purelane_bundle_showcase",
-    "purelane_bundle_tiers"
+    "purelane_bundle_tiers",
+    "purelane_trust_bar"
   ]
 }
