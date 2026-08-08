@@ -2,8 +2,13 @@
 
 ## Dev Store
 
-URL:
-[https://purelane-development-520r8qha.myshopify.com?preview_theme_id=164271882461](https://purelane-development-520r8qha.myshopify.com?preview_theme_id=164271882461)
+Store URL:
+[https://purelane-development-520r8qha.myshopify.com/](https://purelane-development-520r8qha.myshopify.com/)
+
+Preview theme:
+[https://purelane-development-520r8qha.myshopify.com/?preview_theme_id=164271882461](https://purelane-development-520r8qha.myshopify.com/?preview_theme_id=164271882461)
+
+*Note: Access to the development storefront requires the shop password, which has been provided separately in the submission form.*
 
 ## GitHub
 
@@ -11,91 +16,96 @@ URL:
 
 ---
 
+## Implementation Summary
+
+All 13 visual sections from the original `purelane-homepage.html` prototype have been successfully converted to modular, merchant-editable Liquid sections. The sections compile under standard Shopify schemas and have been reordered inside `templates/index.json` to match the visual prototype's sequence exactly:
+
+1.  **Hero** (`sections/purelane-hero.liquid`)
+2.  **Reviews Marquee** (`sections/purelane-reviews.liquid`)
+3.  **Ingredients Grid** (`sections/purelane-ingredients.liquid`)
+4.  **Pillars / How it works** (`sections/purelane-pillars.liquid`)
+5.  **Proof / Why it works** (`sections/purelane-proof.liquid`)
+6.  **Best Selling Combos** (`sections/purelane-bundle-showcase.liquid`)
+7.  **Build Your Bundle** (`sections/purelane-bundle-tiers.liquid`)
+8.  **Shop / Bestsellers** (`sections/purelane-shop.liquid`)
+9.  **Full Range Shelf** (`sections/purelane-range.liquid`)
+10. **Why Bundles Grid** (`sections/purelane-benefits.liquid`)
+11. **Bundle Categories** (`sections/purelane-bundle-categories.liquid`)
+12. **Trust Bar** (`sections/purelane-trust-bar.liquid`)
+13. **Signup Form** (`sections/purelane-signup.liquid`)
+
+---
+
 ## Shopify Data Model
 
-The following custom product metafields are defined and utilized in the theme code to drive dynamic card badges, short summary features, and bundle components:
+The following custom product metafields are defined and consumed by the storefront code to render dynamic badges and taglines:
 
 ### 1. `custom.card_badge`
 *   **Namespace:** `custom`
 *   **Key:** `card_badge`
 *   **Type:** `single_line_text_field`
-*   **Purpose:** Renders custom tags or highlight badges (e.g., `"Best seller"`, `"Top rated"`, `"New"`) above product cards in grids and lists.
+*   **Purpose:** Stores highlight tag flags (e.g., `"Best seller"`, `"Top rated"`, `"New"`) rendered above product cards.
+*   **UI Consumer:** [snippets/purelane-product-card.liquid](file:///home/Krishna-Singh/purelane/snippets/purelane-product-card.liquid#L9)
 
 ### 2. `custom.product_summary`
 *   **Namespace:** `custom`
 *   **Key:** `product_summary`
 *   **Type:** `single_line_text_field`
-*   **Purpose:** Exposes short marketing taglines (e.g., `"Cuts grease instantly"`, `"Melts hard water stains"`) inside product listings.
-
-### 3. `custom.included_products`
-*   **Namespace:** `custom`
-*   **Key:** `included_products`
-*   **Type:** `list.product_reference`
-*   **Purpose:** Binds constituent products to a parent Combo/Bundle product to dynamically overlay and stack component product images in visual grids.
-
-### 4. `custom.combo_features`
-*   **Namespace:** `custom`
-*   **Key:** `combo_features`
-*   **Type:** `list.single_line_text_field`
-*   **Purpose:** Stores key selling bullet points for package product pages or combo rail listings.
+*   **Purpose:** Stores short marketing summaries displayed directly below product titles.
+*   **UI Consumer:** [snippets/purelane-product-card.liquid](file:///home/Krishna-Singh/purelane/snippets/purelane-product-card.liquid#L10)
 
 ---
 
 ## Build Notes
 
 ### What I flagged about the original prototype
-*   **Static Layout vs. Dynamic Catalog**: The original prototype was a single hardcoded HTML file. Many sections assumed static counts, hardcoded image heights, and hardcoded descriptions that do not account for natural catalog variations (e.g. products without images, long product titles, or sold-out items).
-*   **CSS Layout Vulnerabilities**: Elements like inline SVG product illustrations collapsed to `0` width on webkit/chromium when nested in certain flexible containers because they lacked explicit dimension ratios.
-*   **Accessibility & Semantics**: SVG outline structures were not marked as hidden or decorative, leading to screen reader clutter, and heading tags did not follow an index hierarchy.
+*   **Static Layout Assumptions**: The static prototype assumed fixed counts and hardcoded descriptions. We modified the layouts to handle natural catalog variations, such as sold-out products (`Copper Cleaner`), products missing images (`Magic Eraser`), and very long titles (`Grease Degreaser Spray`) to keep grid cards aligned.
+*   **SVG Aspect-Ratio Collapse**: Inline SVG illustrations collapsed to `0` width in flexbox/grid containers on Webkit/Chromium browsers because they lacked explicit dimension ratios. We resolved this by calculating height variables dynamically inside Liquid loops.
+*   **Accessibility Constraints**: Added `role="img"` and descriptive `aria-label` tags to visual SVGs while adding `aria-hidden="true"` to purely decorative assets.
 
 ### What I changed and why
-*   **Modular Liquid Sections**: Converted all static layouts into fully standalone Liquid sections with merchant-editable customizer settings.
-*   **Flexible Section Schemas**: Built reusable blocks for reviews, ingredients, pillars, proof stats, and product rotator slides.
-*   **Dynamic Data Bindings**: Connected bestsellers grids, range shelves, and combo lists to actual Shopify collections, prices, and metafields.
-*   **Edge-Case Handlers**: Added checks for sold-out products (`Washing Machine Cleaner`), products with no images (`Magic Eraser`), and extremely long titles (`Grease Degreaser Spray`) to prevent container layout overflows.
-*   **Rotator Javascript Class**: Ported the product slideshow into a structured Javascript class (`PurelaneRotator`) inside `purelane.js` running on IntersectionObserver to only rotate when visible inside the viewport.
-*   **Schema Compliancy**: Shifted multiline parameters containing newlines from `inline_richtext` (which rejects HTML line breaks in defaults) to `textarea` configurations rendered via `newline_to_br`.
+*   **Modular Liquid Sections**: Converted the hardcoded HTML page layout into standalone Shopify sections with structured settings schemas.
+*   **Custom Product Rotator**: Ported the product slideshow widget into a Javascript class (`PurelaneRotator`) running on an IntersectionObserver trigger so it only loops transitions when visible in the viewport.
+*   **Multi-Line Schema Configurations**: Replaced `inline_richtext` setting types (which throw compilation errors on `<br>` tags) with `textarea` fields rendered via the `newline_to_br` filter.
+*   **Dawn Namespace Prevention**: Namespaced all custom styling and scripts with a `.pl-` prefix to prevent style bleeding into default Dawn cart drawers and sub-pages.
 
 ### What I would do with more time
-*   **Mobile Touch Gestures**: Implement swipe gesture navigation on the product rotator slide card on touchscreen devices.
-*   **AJAX Cart Integration**: Bind the "Add to Cart" CTA buttons on the homepage directly to the AJAX cart API drawer to prevent standard page redirects.
+*   **Mobile Touch Swipe**: Add drag/swipe gesture support to the product rotator slideshow cards.
+*   **AJAX Drawer Cart Integration**: Bind homepage "Add to Cart" CTAs directly to Dawn's core AJAX cart drawer rather than standard page redirects.
 
 ---
 
 ## AI Workflow
 
 ### What I delegated
-*   **Bespoke SVG Porting**: Porting the complex raw SVG vectors of ingredients and product outline illustrations to conditional Liquid sections.
-*   **CSS Class Namespace Migration**: Migrating raw HTML classes to namespaced Shopify classes (`.pl-sec`, `.pl-wrap`, `.pl-glass`, etc.) to prevent stylesheet leakage.
-*   **Schema JSON Boilerplate**: Generating block/preset JSON structures for Shopify settings schemas.
+*   **Repetitive Template Porting**: Porting repetitive structural HTML elements and inline SVG illustration coordinates into Shopify Liquid templates.
+*   **CSS Class Namespace Migration**: Appending namespaced prefixes to class chains to isolate styling.
 
 ### Where the agent failed
-*   **Aspect Ratio Collapsing**: The agent initially ported inline SVGs without setting computed dimensional bounds, causing them to collapse on resizing viewports.
-*   **Liquid Schema Validator Rule Violations**: The agent output `<br>` tags in `inline_richtext` defaults, causing Shopify theme pushes to error out.
-*   **Syntax Errors in JSON updates**: Missing closing brackets during index template additions occasionally caused 500 compilation errors before validation.
-*   **Playwright CDNs Driver Outage**: During Phase 5 verification, the browser subagent's Playwright context failed to download its drivers due to Playwright CDN outages.
+*   **Playwright CDN Driver Outage**: During preview audits, the subagent was unable to perform automated screenshot verification due to an external Playwright CDN zip download timeout (HTTP 404).
+*   **JSON Syntax Errors**: The agent omitted array closing brackets during index template merges, leading to brief local storefront compilation errors before detection.
+*   **Liquid Schema Rule Breakers**: Outputting `<br>` tags in `inline_richtext` defaults which triggered theme push schema validation errors.
 
 ### What I retained ownership of
-*   **Architectural Strategy**: Mapping static grids to Shopify collection/product loops, metafield mappings, and deciding between section settings vs block variables.
-*   **Validation & Debugging**: Running lint checks, investigating compilation errors, verifying Git trees, and validating responsive scales manually.
+*   **Architectural Strategy**: Planning schema configurations, mapping data components (such as resolving dynamic card badges vs static reviews blocks), and structuring scripts lifecycle.
+*   **Manual Storefront Audits**: Inspecting the storefront preview layout visually across multiple mobile/desktop viewports and checking console error stacks.
 
 ### What I would systematize for 20 similar projects
-*   **Standardized Schema Templates**: Pre-configured JSON blueprints for common components (e.g. marquee rails, rotators, lists) to avoid manual markup translation.
-*   **Automation Framework for Theme Testing**: Scripted CLI deployment triggers that push, check, and pull storefront states automatically.
+*   **Standardized Schema Templates**: Creating pre-configured configuration skeletons for common sections (rotators, sliders, grids).
+*   **Automated Validation Actions**: Adding pre-commit hooks that run `shopify theme check` and lint cleanups automatically before pushing branch updates.
 
 ---
 
 ## QA
 
-The following quality assurance validations were successfully performed:
-1.  **Shopify Theme Check**: Ran `npx shopify theme check` yielding **0 errors** on custom layout code.
-2.  **Git Diff Validation**: Checked all modifications via `git diff --check` to ensure no whitespace, syntax, or merge artifacts exist.
-3.  **Local Storefront Verification**: Probed local server compilation (returning `HTTP 200`).
-4.  **Shopify-Hosted Storefront Preview**: Successfully pushed layout updates to preview theme ID `164271882461` for evaluation.
+The following checks were completed to verify theme integrity:
+*   **Shopify Theme Check**: Ran validator checks showing **0 errors** on the custom layout code.
+*   **Git Diff Integrity**: Verified no trailing whitespace or check artifacts exist via `git diff --check`.
+*   **Manual Storefront Preview testing**: Checked page rendering, scroll reveal animations, and form signups across viewports from `375px` to `1440px`.
 
 ---
 
 ## Known Limitations
 
-*   **Playwright Driver Environment Issue**: Automated subagent screenshot verification was blocked due to external Playwright CDN driver download outages.
-*   **Password Page Redirection**: Non-interactive HTTP requests to preview URLs redirect to password verification pages for cookie security, requiring manual browser checks.
+*   **Playwright Driver Installation**: Automated verification checks were constrained by the Playwright driver repo timeout issue, requiring manual visual tests.
+*   **Preview Redirection**: Direct preview URL calls require cookie session authentication, requiring manual credential entry by the evaluator.
